@@ -106,7 +106,7 @@ export default function Home() {
   const selectedProject = portfolioProjects.find(p => p.vimeoId === selectedVimeoId);
   const heroRef = React.useRef<HTMLDivElement>(null);
   return (
-    <main className="h-screen overflow-y-scroll snap-y snap-proximity w-full">
+    <main className="h-screen overflow-y-scroll snap-y snap-mandatory w-full">
       {/* Hero Section */}
       <section ref={heroRef} className="relative flex items-center justify-center h-screen w-full overflow-hidden snap-start bg-[#eb7b55]">
         <div className="absolute top-8 left-0 w-full z-20 flex flex-row items-center justify-between px-10">
