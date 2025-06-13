@@ -106,29 +106,35 @@ export default function Home() {
   const selectedProject = portfolioProjects.find(p => p.vimeoId === selectedVimeoId);
   const heroRef = React.useRef<HTMLDivElement>(null);
   return (
-    <main className="h-screen overflow-y-scroll snap-y snap-mandatory w-full">
+    <main className="min-h-screen overflow-y-scroll snap-y snap-mandatory w-full overflow-x-hidden">
       {/* Hero Section */}
-      <section ref={heroRef} className="relative flex items-center justify-center h-screen w-full overflow-hidden snap-start bg-[#eb7b55]">
-        <div className="absolute top-8 left-0 w-full z-20 flex flex-row items-center justify-between px-10">
+      <section ref={heroRef} className="relative flex items-center justify-center min-h-screen md:h-screen w-full overflow-hidden snap-start bg-[#eb7b55]">
+        <div className="absolute top-2 md:top-8 left-0 w-full z-20 flex flex-row items-center justify-between px-2 md:px-10">
           <div className="flex items-center">
-            <Image src="/kirit_singh_logo.png" alt="Kirit Singh Logo" width={56} height={56} className="object-contain mr-8" />
+            <Image 
+              src="/kirit_singh_logo.png" 
+              alt="Kirit Singh Logo" 
+              width={56} 
+              height={56} 
+              className="object-contain mr-8 hidden md:block"
+            />
           </div>
-          <div className="flex space-x-6">
+          <div className="flex space-x-4 md:space-x-6">
             {navLinks.map((link) => (
               <a
                 key={link.href}
                 href={link.href}
-                className={`text-lg font-semibold px-3 py-1 rounded transition-colors duration-200 ${pathname === link.href ? 'text-white bg-[#eb7b55]' : 'text-white hover:bg-[#eb7b55]/20'}`}
+                className={`text-base md:text-lg font-semibold px-3 py-2 rounded transition-colors duration-200 min-h-[40px] ${pathname === link.href ? 'text-white bg-[#eb7b55]' : 'text-white hover:bg-[#eb7b55]/20'}`}
               >
                 {link.label}
               </a>
             ))}
           </div>
         </div>
-        <Image src="/nyc-skyline.jpg" alt="NYC Skyline" fill className="object-cover" priority />
+        <Image src="/Kirit_singh_nyc-skyline.jpg" alt="NYC Skyline" fill className="object-cover" priority />
         <div className="absolute inset-0 bg-gray-900/60" />
         <div className="relative z-10 text-center text-white">
-          <h1 className="text-5xl md:text-7xl font-heading font-bold mb-4 tracking-tight">KIRIT SINGH</h1>
+          <h1 className="text-3xl md:text-7xl font-heading font-bold mb-4 tracking-tight">KIRIT SINGH</h1>
           <OrangeBarText />
         </div>
         {/* Custom Reel Arrow with hover swap */}
@@ -148,16 +154,16 @@ export default function Home() {
         </div>
       </section>
       {/* Video Reel Section */}
-      <section className="flex flex-col items-center justify-center h-screen w-full px-4 py-4 gap-4 snap-start bg-[#eb7b55]">
+      <section className="flex flex-col items-center justify-center min-h-screen md:h-screen w-full px-2 md:px-4 py-4 gap-2 md:gap-4 snap-start bg-[#eb7b55]">
         <Image
           src="/kiritsingh_awards.png"
           alt="Awards"
           width={0}
           height={80}
-          className="object-contain w-3/4 h-auto mb-2"
-          sizes="75vw"
+          className="object-contain w-4/5 md:w-3/4 h-auto mb-2"
+          sizes="(max-width: 768px) 90vw, 75vw"
         />
-        <div className="w-full max-w-6xl aspect-video rounded-3xl overflow-hidden shadow-2xl bg-white p-8 flex items-center justify-center relative">
+        <div className="w-full max-w-6xl aspect-video rounded-2xl md:rounded-3xl overflow-hidden shadow-2xl bg-white p-2 md:p-8 flex items-center justify-center relative">
           <iframe
             src="https://player.vimeo.com/video/1036458739?h=dde68b6347&amp;title=0&amp;byline=0&amp;portrait=0&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479"
             width="1920"
@@ -165,26 +171,39 @@ export default function Home() {
             frameBorder="0"
             allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media"
             title="Kirit_Showreel_2025"
-            className="w-full h-full rounded-2xl"
+            className="w-full h-full rounded-xl md:rounded-2xl"
             allowFullScreen
           />
         </div>
       </section>
       {/* About & Logos Section */}
-      <section className="flex flex-col items-center justify-center h-screen w-full bg-[#eb7b55] px-4 py-20 snap-start">
-        <div className="flex flex-col md:flex-row items-center justify-center gap-24 w-full max-w-7xl mx-auto">
+      <section className="flex flex-col items-center justify-center min-h-screen w-full bg-[#eb7b55] px-4 py-12 md:py-20 snap-start">
+        <div className="flex flex-col md:flex-row items-center justify-center gap-8 md:gap-24 w-full max-w-7xl mx-auto">
           {/* Headshot */}
           <div className="flex flex-col items-center">
-            <div className="w-[380px] h-[380px] rounded-full overflow-hidden bg-[#1ed6b5] shadow-lg mb-0">
-              <Image src="/Kirit_Singh-orange-portait.png" alt="Kirit Singh" width={380} height={380} className="object-cover w-full h-full" />
+            <div className="w-[280px] h-[280px] md:w-[380px] md:h-[380px] rounded-full overflow-hidden bg-[#1ed6b5] shadow-lg mb-0">
+              <Image 
+                src="/Kirit_Singh-orange-portait.png" 
+                alt="Kirit Singh" 
+                width={380} 
+                height={380} 
+                className="object-cover w-full h-full" 
+              />
             </div>
           </div>
           {/* Text and Logos */}
-          <div className="flex flex-col items-center md:items-start max-w-2xl w-full">
-            <p className="text-2xl md:text-3xl font-medium text-white leading-snug mb-12 text-center md:text-left">
+          <div className="flex flex-col items-center md:items-start max-w-2xl w-full px-4 md:px-0">
+            <p className="text-base md:text-3xl font-medium text-white leading-relaxed md:leading-snug mb-8 md:mb-12 text-center md:text-left">
               I produce high-impact content for television networks and Fortune 500 companies, featured on CNN, ESPN, and FOX. From branded content to documentaries, I lead international productions from pitch to delivery, combining creative vision with flawless execution to deliver work that resonates.
             </p>
-            <Image src="/kiritsingh_logos.png" alt="Company Logos" width={720} height={144} className="object-contain max-w-2xl w-full" />
+            <Image 
+              src="/kiritsingh_logos.png" 
+              alt="Company Logos" 
+              width={720} 
+              height={144} 
+              className="object-contain max-w-full md:max-w-2xl w-full" 
+              sizes="(max-width: 768px) 90vw, 50vw"
+            />
           </div>
         </div>
       </section>
@@ -192,11 +211,11 @@ export default function Home() {
       <section className="w-full bg-white px-4 py-20 snap-start">
         <div className="max-w-7xl mx-auto">
           <h2 className="text-3xl md:text-4xl font-heading font-bold mb-10 text-center">Portfolio</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-1">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
             {portfolioProjects.map((project, i) => (
               <div key={project.vimeoId} className="flex flex-col items-center">
                 <div
-                  className="w-full aspect-square bg-gray-100 overflow-hidden shadow group cursor-pointer relative"
+                  className="w-full aspect-square bg-gray-100 overflow-hidden shadow group cursor-pointer relative rounded-xl md:rounded-2xl focus:outline-none focus:ring-2 focus:ring-primary"
                   onClick={() => {
                     setSelectedVimeoId(project.vimeoId);
                     setModalOpen(true);
@@ -205,6 +224,7 @@ export default function Home() {
                   role="button"
                   aria-label={`Open video for ${project.title}`}
                   onKeyDown={e => { if (e.key === 'Enter' || e.key === ' ') { setSelectedVimeoId(project.vimeoId); setModalOpen(true); } }}
+                  style={{ minHeight: 120 }}
                 >
                   <div className="relative w-full h-0 pb-[100%]">
                     <Image
@@ -212,6 +232,7 @@ export default function Home() {
                       alt={project.title}
                       fill
                       className="object-cover group-hover:scale-105 transition-transform duration-300"
+                      sizes="(max-width: 768px) 90vw, 33vw"
                     />
                   </div>
                 </div>
@@ -228,7 +249,7 @@ export default function Home() {
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-80" onClick={() => setModalOpen(false)}>
           <div className="relative w-full max-w-3xl mx-auto px-4" onClick={e => e.stopPropagation()}>
             <button
-              className="absolute top-4 right-4 text-white text-3xl font-bold z-10 bg-black bg-opacity-40 rounded-full w-10 h-10 flex items-center justify-center"
+              className="absolute top-2 right-2 md:top-4 md:right-4 text-white text-4xl md:text-3xl font-bold z-10 bg-black bg-opacity-40 rounded-full w-12 h-12 md:w-10 md:h-10 flex items-center justify-center"
               onClick={() => setModalOpen(false)}
               aria-label="Close video modal"
             >
