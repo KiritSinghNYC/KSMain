@@ -111,7 +111,7 @@ export default function Home() {
       <section ref={heroRef} className="relative flex items-center justify-center h-screen w-full overflow-hidden bg-[#eb7b55] snap-start">
         <div className="absolute top-2 md:top-8 left-0 w-full z-20 flex flex-row items-center justify-between px-2 md:px-10">
           {/* Remove logo on mobile, keep on desktop */}
-          <div className="flex items-center w-full justify-center md:justify-start">
+          <div className="flex items-center justify-center md:justify-start w-auto md:w-full">
             <Image 
               src="/kirit_singh_logo.png" 
               alt="Kirit Singh Logo" 
@@ -121,7 +121,7 @@ export default function Home() {
             />
           </div>
           {/* Center nav links on mobile, keep original on desktop */}
-          <div className="flex w-full justify-center md:justify-end space-x-4 md:space-x-6">
+          <div className="flex justify-center md:justify-end space-x-4 md:space-x-6 w-auto md:w-full">
             {navLinks.map((link) => (
               <a
                 key={link.href}
@@ -147,7 +147,7 @@ export default function Home() {
           onMouseLeave={() => setReelHover(false)}
         >
           <Image
-            src={reelHover ? "/Kirit_singh_orange_reel.png" : "/reel.png"}
+            src={reelHover ? "/Kirit_singh_orange_reel.png" : "/Kirit_singh_reel.png"}
             alt="Scroll Down"
             width={80}
             height={80}
@@ -179,11 +179,23 @@ export default function Home() {
         </div>
       </section>
       {/* About & Logos Section */}
-      <section className="flex flex-col items-center justify-center h-screen w-full bg-[#eb7b55] px-4 py-12 md:py-20 snap-start">
-        <div className="flex flex-col md:flex-row items-center justify-center gap-8 md:gap-24 w-full max-w-7xl mx-auto">
+      <section className="flex flex-col items-center justify-center h-screen w-full bg-[#eb7b55] px-4 py-12 md:py-20 snap-start relative">
+        {/* Awards image - mobile only, edge-to-edge, top third */}
+        <div className="block md:hidden absolute top-[10vh] left-0 w-full z-10">
+          <Image
+            src="/kiritsingh_awards.png"
+            alt="Awards"
+            width={0}
+            height={80}
+            className="w-full h-auto object-cover m-0 p-0"
+            sizes="100vw"
+            priority
+          />
+        </div>
+        <div className="flex flex-col md:flex-row items-center justify-center gap-8 md:gap-24 w-full max-w-7xl mx-auto h-full">
           {/* Headshot */}
           <div className="flex flex-col items-center">
-            <div className="w-[280px] h-[280px] md:w-[380px] md:h-[380px] rounded-full overflow-hidden bg-[#1ed6b5] shadow-lg mb-0">
+            <div className="w-[140px] h-[140px] md:w-[380px] md:h-[380px] rounded-full overflow-hidden bg-[#1ed6b5] shadow-lg mb-0">
               <Image 
                 src="/Kirit_Singh-orange-portait.png" 
                 alt="Kirit Singh" 
@@ -210,9 +222,20 @@ export default function Home() {
         </div>
       </section>
       {/* Portfolio Grid Section */}
-      <section className="w-full bg-white px-4 py-20 snap-start">
+      <section className="w-full bg-white px-4 py-20 snap-start relative">
+        {/* Mobile-only scroll-to-top button */}
+        <button
+          type="button"
+          className="fixed bottom-6 right-6 z-40 block md:hidden bg-[#eb7b55] text-white rounded-full shadow-lg p-3 focus:outline-none focus:ring-2 focus:ring-[#eb7b55] transition-opacity"
+          aria-label="Scroll to top"
+          onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-7 h-7">
+            <path strokeLinecap="round" strokeLinejoin="round" d="M5 15l7-7 7 7" />
+          </svg>
+        </button>
         <div className="max-w-7xl mx-auto">
-          <h2 className="text-3xl md:text-4xl font-heading font-bold mb-10 text-center">Portfolio</h2>
+          <h2 className="text-3xl md:text-4xl font-heading font-bold mb-4 md:mb-10 text-center">Portfolio</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
             {portfolioProjects.map((project, i) => (
               <div key={project.vimeoId} className="flex flex-col items-center">
