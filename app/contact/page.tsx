@@ -18,7 +18,7 @@ export default function ContactPage() {
         </div>
       </div>
 
-      {/* Contact Section */}
+      {/* Contact Section (restored, no snap scrolling) */}
       <main className="flex-1 flex flex-col items-center justify-center px-4 py-20 bg-white">
         <h1 className="text-4xl md:text-5xl font-extrabold text-[#eb7b55] mb-6 text-center">Let's connect!</h1>
         <p className="text-lg md:text-2xl text-gray-800 mb-10 text-center max-w-xl">

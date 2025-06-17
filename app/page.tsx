@@ -106,9 +106,9 @@ export default function Home() {
   const selectedProject = portfolioProjects.find(p => p.vimeoId === selectedVimeoId);
   const heroRef = React.useRef<HTMLDivElement>(null);
   return (
-    <main className="min-h-screen overflow-y-scroll snap-y snap-mandatory w-full overflow-x-hidden">
+    <main className="h-screen overflow-y-auto snap-y snap-mandatory w-full overflow-x-hidden">
       {/* Hero Section */}
-      <section ref={heroRef} className="relative flex items-center justify-center min-h-screen md:h-screen w-full overflow-hidden snap-start bg-[#eb7b55]">
+      <section ref={heroRef} className="relative flex items-center justify-center h-screen w-full overflow-hidden bg-[#eb7b55] snap-start">
         <div className="absolute top-2 md:top-8 left-0 w-full z-20 flex flex-row items-center justify-between px-2 md:px-10">
           <div className="flex items-center">
             <Image 
@@ -154,7 +154,7 @@ export default function Home() {
         </div>
       </section>
       {/* Video Reel Section */}
-      <section className="flex flex-col items-center justify-center min-h-screen md:h-screen w-full px-2 md:px-4 py-4 gap-2 md:gap-4 snap-start bg-[#eb7b55]">
+      <section className="flex flex-col items-center justify-center h-screen w-full px-2 md:px-4 py-4 gap-2 md:gap-4 bg-[#eb7b55] snap-start">
         <Image
           src="/kiritsingh_awards.png"
           alt="Awards"
@@ -177,7 +177,7 @@ export default function Home() {
         </div>
       </section>
       {/* About & Logos Section */}
-      <section className="flex flex-col items-center justify-center min-h-screen w-full bg-[#eb7b55] px-4 py-12 md:py-20 snap-start">
+      <section className="flex flex-col items-center justify-center h-screen w-full bg-[#eb7b55] px-4 py-12 md:py-20 snap-start">
         <div className="flex flex-col md:flex-row items-center justify-center gap-8 md:gap-24 w-full max-w-7xl mx-auto">
           {/* Headshot */}
           <div className="flex flex-col items-center">
@@ -208,7 +208,7 @@ export default function Home() {
         </div>
       </section>
       {/* Portfolio Grid Section */}
-      <section className="w-full bg-white px-4 py-20 snap-start">
+      <section className="h-screen w-full bg-white px-4 py-20 snap-start">
         <div className="max-w-7xl mx-auto">
           <h2 className="text-3xl md:text-4xl font-heading font-bold mb-10 text-center">Portfolio</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
