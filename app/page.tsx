@@ -124,19 +124,19 @@ export default function Home() {
     <main ref={mainRef} className="h-screen overflow-y-auto snap-y snap-mandatory w-full overflow-x-hidden">
       {/* Hero Section */}
       <section ref={heroRef} className="relative flex items-center justify-center h-screen w-full overflow-hidden bg-[#eb7b55] snap-start">
-        <div className="absolute top-2 md:top-8 left-0 w-full z-20 flex flex-row items-center justify-between px-2 md:px-10">
+        <div className="absolute top-2 md:top-8 left-0 w-full z-20 flex flex-col md:flex-row items-center md:justify-between px-2 md:px-10">
           {/* Remove logo on mobile, keep on desktop */}
-          <div className="flex items-center justify-center md:justify-start w-auto md:w-full">
+          <div className="hidden md:flex items-center w-full md:w-auto justify-start">
             <Image 
               src="/kirit_singh_logo.png" 
               alt="Kirit Singh Logo" 
               width={56} 
               height={56} 
-              className="object-contain mr-8 hidden md:block"
+              className="object-contain mr-8"
             />
           </div>
           {/* Center nav links on mobile, keep original on desktop */}
-          <div className="flex justify-center md:justify-end space-x-4 md:space-x-6 w-auto md:w-full">
+          <div className="flex justify-center space-x-4 md:space-x-6 w-full md:w-auto">
             {navLinks.map((link) => (
               <a
                 key={link.href}
@@ -172,8 +172,8 @@ export default function Home() {
       </section>
       {/* Video Reel Section */}
       <section className="flex flex-col items-center justify-center h-screen w-full px-2 md:px-4 py-4 gap-2 md:gap-4 bg-[#eb7b55] snap-start overflow-hidden relative">
-        {/* Awards image - edge-to-edge, top third */}
-        <div className="absolute top-[10vh] left-0 w-full z-10">
+        {/* Awards image - edge-to-edge, top third on mobile; block above video on desktop */}
+        <div className="absolute top-[10vh] left-0 w-full z-10 block md:hidden">
           <Image
             src="/kiritsingh_awards.png"
             alt="Awards"
@@ -184,7 +184,18 @@ export default function Home() {
             priority
           />
         </div>
-        <div className="w-full max-w-6xl aspect-video rounded-2xl md:rounded-3xl overflow-hidden shadow-2xl bg-white p-2 md:p-8 flex items-center justify-center relative mt-24 md:mt-0">
+        <div className="hidden md:block w-3/4 mx-auto mb-4">
+          <Image
+            src="/kiritsingh_awards.png"
+            alt="Awards"
+            width={1200}
+            height={120}
+            className="w-full h-auto object-contain"
+            sizes="75vw"
+            priority
+          />
+        </div>
+        <div className="w-full max-w-6xl aspect-video rounded-2xl md:rounded-3xl overflow-hidden shadow-2xl bg-white p-2 md:p-8 flex items-center justify-center relative mt-8 md:mt-0">
           <iframe
             src="https://player.vimeo.com/video/1036458739?h=dde68b6347&amp;title=0&amp;byline=0&amp;portrait=0&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479"
             width="1920"
@@ -198,7 +209,7 @@ export default function Home() {
         </div>
       </section>
       {/* About & Logos Section */}
-      <section className="flex flex-col items-center justify-center h-screen w-full bg-[#eb7b55] px-4 pt-4 md:pt-20 pb-12 md:py-20 snap-start relative">
+      <section className="flex flex-col items-center justify-center h-screen w-full bg-[#eb7b55] px-4 pt-0 md:pt-20 pb-12 md:py-20 snap-start relative">
         <div className="flex flex-col md:flex-row items-center justify-center gap-8 md:gap-24 w-full max-w-7xl mx-auto h-full">
           {/* Headshot */}
           <div className="flex flex-col items-center">
