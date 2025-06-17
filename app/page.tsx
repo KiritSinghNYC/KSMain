@@ -110,14 +110,20 @@ export default function Home() {
   const mainRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
+    const main = mainRef.current;
+    if (!main) return;
     const handleScroll = () => {
-      if (!portfolioRef.current) return;
-      const rect = portfolioRef.current.getBoundingClientRect();
-      setShowScrollTop(rect.top < window.innerHeight && rect.bottom > 0);
+      if (!portfolioRef.current || !mainRef.current) return;
+      const mainRect = mainRef.current.getBoundingClientRect();
+      const portfolioRect = portfolioRef.current.getBoundingClientRect();
+      // Calculate relative to the main scroll container
+      const visibleTop = portfolioRect.top - mainRect.top;
+      const visibleBottom = portfolioRect.bottom - mainRect.top;
+      setShowScrollTop(visibleTop < main.clientHeight && visibleBottom > 0);
     };
-    window.addEventListener('scroll', handleScroll, { passive: true });
+    main.addEventListener('scroll', handleScroll, { passive: true });
     handleScroll();
-    return () => window.removeEventListener('scroll', handleScroll);
+    return () => main.removeEventListener('scroll', handleScroll);
   }, []);
 
   return (
@@ -240,7 +246,7 @@ export default function Home() {
         </div>
       </section>
       {/* Portfolio Grid Section */}
-      <section ref={portfolioRef} className="w-full bg-white px-4 py-20 snap-start relative">
+      <section ref={portfolioRef} className="w-full bg-white px-4 pt-4 pb-20 snap-start relative">
         {/* Mobile-only scroll-to-top button, only visible when portfolio section is in view */}
         {showScrollTop && (
           <button
