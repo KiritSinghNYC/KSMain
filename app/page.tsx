@@ -110,7 +110,8 @@ export default function Home() {
       {/* Hero Section */}
       <section ref={heroRef} className="relative flex items-center justify-center h-screen w-full overflow-hidden bg-[#eb7b55] snap-start">
         <div className="absolute top-2 md:top-8 left-0 w-full z-20 flex flex-row items-center justify-between px-2 md:px-10">
-          <div className="flex items-center">
+          {/* Remove logo on mobile, keep on desktop */}
+          <div className="flex items-center w-full justify-center md:justify-start">
             <Image 
               src="/kirit_singh_logo.png" 
               alt="Kirit Singh Logo" 
@@ -119,7 +120,8 @@ export default function Home() {
               className="object-contain mr-8 hidden md:block"
             />
           </div>
-          <div className="flex space-x-4 md:space-x-6">
+          {/* Center nav links on mobile, keep original on desktop */}
+          <div className="flex w-full justify-center md:justify-end space-x-4 md:space-x-6">
             {navLinks.map((link) => (
               <a
                 key={link.href}
@@ -154,7 +156,7 @@ export default function Home() {
         </div>
       </section>
       {/* Video Reel Section */}
-      <section className="flex flex-col items-center justify-center h-screen w-full px-2 md:px-4 py-4 gap-2 md:gap-4 bg-[#eb7b55] snap-start">
+      <section className="flex flex-col items-center justify-center h-screen w-full px-2 md:px-4 py-4 gap-2 md:gap-4 bg-[#eb7b55] snap-start overflow-hidden">
         <Image
           src="/kiritsingh_awards.png"
           alt="Awards"
