@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
 import ScrollDownArrow from './components/ScrollDownArrow';
 import { usePathname } from 'next/navigation';
@@ -105,8 +105,23 @@ export default function Home() {
   const [selectedVimeoId, setSelectedVimeoId] = useState<string | null>(null);
   const selectedProject = portfolioProjects.find(p => p.vimeoId === selectedVimeoId);
   const heroRef = React.useRef<HTMLDivElement>(null);
+  const portfolioRef = useRef<HTMLDivElement>(null);
+  const [showScrollTop, setShowScrollTop] = useState(false);
+  const mainRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (!portfolioRef.current) return;
+      const rect = portfolioRef.current.getBoundingClientRect();
+      setShowScrollTop(rect.top < window.innerHeight && rect.bottom > 0);
+    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll();
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   return (
-    <main className="h-screen overflow-y-auto snap-y snap-mandatory w-full overflow-x-hidden">
+    <main ref={mainRef} className="h-screen overflow-y-auto snap-y snap-mandatory w-full overflow-x-hidden">
       {/* Hero Section */}
       <section ref={heroRef} className="relative flex items-center justify-center h-screen w-full overflow-hidden bg-[#eb7b55] snap-start">
         <div className="absolute top-2 md:top-8 left-0 w-full z-20 flex flex-row items-center justify-between px-2 md:px-10">
@@ -141,7 +156,7 @@ export default function Home() {
         </div>
         {/* Custom Reel Arrow with hover swap */}
         <div
-          className="absolute bottom-8 left-12 z-20 flex flex-col items-center animate-bounce-slow cursor-pointer"
+          className="absolute bottom-8 left-12 z-20 flex flex-col items-center animate-bounce-slow cursor-pointer hidden md:flex"
           onClick={() => window.scrollTo({ top: window.innerHeight, behavior: 'smooth' })}
           onMouseEnter={() => setReelHover(true)}
           onMouseLeave={() => setReelHover(false)}
@@ -156,16 +171,20 @@ export default function Home() {
         </div>
       </section>
       {/* Video Reel Section */}
-      <section className="flex flex-col items-center justify-center h-screen w-full px-2 md:px-4 py-4 gap-2 md:gap-4 bg-[#eb7b55] snap-start overflow-hidden">
-        <Image
-          src="/kiritsingh_awards.png"
-          alt="Awards"
-          width={0}
-          height={80}
-          className="object-contain w-4/5 md:w-3/4 h-auto mb-2"
-          sizes="(max-width: 768px) 90vw, 75vw"
-        />
-        <div className="w-full max-w-6xl aspect-video rounded-2xl md:rounded-3xl overflow-hidden shadow-2xl bg-white p-2 md:p-8 flex items-center justify-center relative">
+      <section className="flex flex-col items-center justify-center h-screen w-full px-2 md:px-4 py-4 gap-2 md:gap-4 bg-[#eb7b55] snap-start overflow-hidden relative">
+        {/* Awards image - edge-to-edge, top third */}
+        <div className="absolute top-[10vh] left-0 w-full z-10">
+          <Image
+            src="/kiritsingh_awards.png"
+            alt="Awards"
+            width={0}
+            height={80}
+            className="w-full h-auto object-cover m-0 p-0"
+            sizes="100vw"
+            priority
+          />
+        </div>
+        <div className="w-full max-w-6xl aspect-video rounded-2xl md:rounded-3xl overflow-hidden shadow-2xl bg-white p-2 md:p-8 flex items-center justify-center relative mt-24 md:mt-0">
           <iframe
             src="https://player.vimeo.com/video/1036458739?h=dde68b6347&amp;title=0&amp;byline=0&amp;portrait=0&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479"
             width="1920"
@@ -179,19 +198,7 @@ export default function Home() {
         </div>
       </section>
       {/* About & Logos Section */}
-      <section className="flex flex-col items-center justify-center h-screen w-full bg-[#eb7b55] px-4 py-12 md:py-20 snap-start relative">
-        {/* Awards image - mobile only, edge-to-edge, top third */}
-        <div className="block md:hidden absolute top-[10vh] left-0 w-full z-10">
-          <Image
-            src="/kiritsingh_awards.png"
-            alt="Awards"
-            width={0}
-            height={80}
-            className="w-full h-auto object-cover m-0 p-0"
-            sizes="100vw"
-            priority
-          />
-        </div>
+      <section className="flex flex-col items-center justify-center h-screen w-full bg-[#eb7b55] px-4 pt-4 md:pt-20 pb-12 md:py-20 snap-start relative">
         <div className="flex flex-col md:flex-row items-center justify-center gap-8 md:gap-24 w-full max-w-7xl mx-auto h-full">
           {/* Headshot */}
           <div className="flex flex-col items-center">
@@ -222,18 +229,24 @@ export default function Home() {
         </div>
       </section>
       {/* Portfolio Grid Section */}
-      <section className="w-full bg-white px-4 py-20 snap-start relative">
-        {/* Mobile-only scroll-to-top button */}
-        <button
-          type="button"
-          className="fixed bottom-6 right-6 z-40 block md:hidden bg-[#eb7b55] text-white rounded-full shadow-lg p-3 focus:outline-none focus:ring-2 focus:ring-[#eb7b55] transition-opacity"
-          aria-label="Scroll to top"
-          onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-        >
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-7 h-7">
-            <path strokeLinecap="round" strokeLinejoin="round" d="M5 15l7-7 7 7" />
-          </svg>
-        </button>
+      <section ref={portfolioRef} className="w-full bg-white px-4 py-20 snap-start relative">
+        {/* Mobile-only scroll-to-top button, only visible when portfolio section is in view */}
+        {showScrollTop && (
+          <button
+            type="button"
+            className="fixed bottom-6 right-6 z-40 block md:hidden bg-[#eb7b55] text-white rounded-full shadow-lg p-3 focus:outline-none focus:ring-2 focus:ring-[#eb7b55] transition-opacity"
+            aria-label="Scroll to top"
+            onClick={() => {
+              if (mainRef.current) {
+                mainRef.current.scrollTo({ top: 0, behavior: 'smooth' });
+              }
+            }}
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-7 h-7">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M5 15l7-7 7 7" />
+            </svg>
+          </button>
+        )}
         <div className="max-w-7xl mx-auto">
           <h2 className="text-3xl md:text-4xl font-heading font-bold mb-4 md:mb-10 text-center">Portfolio</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
