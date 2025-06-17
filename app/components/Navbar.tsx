@@ -36,8 +36,8 @@ export default function Navbar() {
               className={`text-base md:text-lg font-semibold px-3 py-2 rounded transition-colors duration-200 min-h-[40px] 
                 ${isAboutOrContact
                   ? pathname === link.href
-                    ? 'text-[#eb7b55] bg-[#eb7b55]/10 md:text-white md:bg-[#eb7b55]'
-                    : 'text-[#eb7b55] hover:bg-[#eb7b55]/10 md:text-white md:hover:bg-[#eb7b55]/20'
+                    ? 'text-[#eb7b55] bg-[#eb7b55]/10 md:text-[#eb7b55] md:bg-[#eb7b55]/10'
+                    : 'text-[#eb7b55] hover:bg-[#eb7b55]/10 md:text-[#eb7b55] md:hover:bg-[#eb7b55]/10'
                   : pathname === link.href
                     ? 'text-white bg-[#eb7b55]'
                     : 'text-white hover:bg-[#eb7b55]/20'}
