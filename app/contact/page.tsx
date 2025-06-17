@@ -1,23 +1,11 @@
 "use client";
 import Link from "next/link";
+import Navbar from '../components/Navbar';
 
 export default function ContactPage() {
   return (
     <div className="flex flex-col min-h-screen w-full bg-white font-sans">
-      {/* Navbar (reuse style from About) */}
-      <div className="relative w-full">
-        <div className="absolute top-8 left-0 w-full z-20 flex flex-row items-center justify-between px-10">
-          <div className="flex items-center">
-            <img src="/kirit_singh_logo.png" alt="Kirit Singh Logo" width={56} height={56} className="object-contain mr-8" />
-          </div>
-          <div className="flex space-x-6">
-            <Link href="/" className="text-lg font-semibold px-3 py-1 rounded transition-colors duration-200 text-[#eb7b55] hover:bg-[#eb7b55]/10">Home</Link>
-            <Link href="/about" className="text-lg font-semibold px-3 py-1 rounded transition-colors duration-200 text-[#eb7b55] hover:bg-[#eb7b55]/10">About</Link>
-            <Link href="/contact" className="text-lg font-semibold px-3 py-1 rounded transition-colors duration-200 text-[#eb7b55] hover:bg-[#eb7b55]/10">Contact</Link>
-          </div>
-        </div>
-      </div>
-
+      <Navbar />
       {/* Contact Section (restored, no snap scrolling) */}
       <main className="flex-1 flex flex-col items-center justify-center px-4 py-20 bg-white">
         <h1 className="text-4xl md:text-5xl font-extrabold text-[#eb7b55] mb-6 text-center">Let's connect!</h1>
