@@ -9,10 +9,10 @@ export default function AboutPage() {
       <Navbar />
 
       {/* About Me Section */}
-      <section className="w-full flex flex-col md:flex-row items-center md:items-center px-4 pt-4 md:pt-36 md:pb-16 md:gap-12 md:justify-center md:h-[calc(100vh-8rem)]">
+      <section className="w-full flex flex-col md:flex-row items-center md:items-center px-4 pt-24 md:pt-36 md:pb-16 md:gap-12 md:justify-center md:h-[calc(100vh-8rem)]">
         {/* Photo */}
-        <div className="w-16 h-16 md:w-96 md:h-96 rounded-full overflow-hidden bg-white shadow-lg mt-2 mb-2 md:mt-0 md:mb-0 md:mr-12 flex-shrink-0 flex items-center justify-center">
-          <Image src="/Kirit_Singh-orange-portait.png" alt="Kirit Singh" width={384} height={384} className="object-cover w-full h-full" />
+        <div className="w-32 h-32 md:w-96 md:h-96 rounded-full overflow-hidden bg-white shadow-lg mt-2 mb-2 md:mt-0 md:mb-0 md:mr-12 flex-shrink-0 flex items-center justify-center">
+          <Image src="/Kirit_Singh-orange-portait.png" alt="Kirit Singh" width={128} height={128} className="object-cover w-full h-full" />
         </div>
         {/* Text */}
         <div className="flex flex-col items-center md:items-start max-w-2xl w-full justify-center">
