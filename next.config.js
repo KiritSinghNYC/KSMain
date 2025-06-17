@@ -1,8 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  images: {
-    unoptimized: true,
-  },
+  // No static export or unoptimized images; use Vercel defaults
 }
 
 module.exports = nextConfig; 
