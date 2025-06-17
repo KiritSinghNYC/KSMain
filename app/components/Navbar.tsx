@@ -12,6 +12,8 @@ const navLinks = [
 
 export default function Navbar() {
   const pathname = usePathname();
+  // Determine if we are on About or Contact for orange links
+  const isAboutOrContact = pathname === '/about' || pathname === '/contact';
   return (
     <div className="relative w-full">
       <div className="absolute top-2 md:top-8 left-0 w-full z-20 flex flex-col md:flex-row items-center md:justify-between px-2 md:px-10">
@@ -31,7 +33,15 @@ export default function Navbar() {
             <Link
               key={link.href}
               href={link.href}
-              className={`text-base md:text-lg font-semibold px-3 py-2 rounded transition-colors duration-200 min-h-[40px] ${pathname === link.href ? "text-[#eb7b55] bg-[#eb7b55]/10 md:text-white md:bg-[#eb7b55]" : "text-[#eb7b55] hover:bg-[#eb7b55]/10 md:text-white md:hover:bg-[#eb7b55]/20"}`}
+              className={`text-base md:text-lg font-semibold px-3 py-2 rounded transition-colors duration-200 min-h-[40px] 
+                ${isAboutOrContact
+                  ? pathname === link.href
+                    ? 'text-[#eb7b55] bg-[#eb7b55]/10 md:text-white md:bg-[#eb7b55]'
+                    : 'text-[#eb7b55] hover:bg-[#eb7b55]/10 md:text-white md:hover:bg-[#eb7b55]/20'
+                  : pathname === link.href
+                    ? 'text-white bg-[#eb7b55]'
+                    : 'text-white hover:bg-[#eb7b55]/20'}
+              `}
             >
               {link.label}
             </Link>
